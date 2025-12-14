@@ -6,15 +6,38 @@ import CreatePage from "./pages/CreatePage";
 import HomePage from "./pages/HomePage";
 import NavBar from "./compotents/Navbar";
 
+import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import { useMemo, useState } from "react";
+
 function App() {
+
+  const [mode, setMode] = useState("light");
+
+  const theme = useMemo(
+    () => 
+      createTheme({
+        palette:{
+          mode,
+        },
+      }),
+    [mode]
+  );
+
+  const toggleTheme = () => {
+    setMode((prev) => (prev === "light" ? "dark": "light"));
+  }
+
   return (
-    <Box sx={{height: '100vh'}}>
-      <NavBar/>
-      <Routes>
-        <Route path="/" element={<HomePage />}></Route>
-        <Route path="/create" element={<CreatePage />}></Route>
-      </Routes>
-    </Box>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+        <Box sx={{height: '100vh'}}>
+          <NavBar toggleTheme={toggleTheme} mode={mode}/>
+          <Routes>
+            <Route path="/" element={<HomePage />}></Route>
+            <Route path="/create" element={<CreatePage />}></Route>
+          </Routes>
+        </Box>
+    </ThemeProvider>
   );
 }
 
