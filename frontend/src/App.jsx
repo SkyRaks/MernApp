@@ -10,7 +10,6 @@ import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
 import { useMemo, useState } from "react";
 
 function App() {
-
   const [mode, setMode] = useState("light");
 
   const theme = useMemo(

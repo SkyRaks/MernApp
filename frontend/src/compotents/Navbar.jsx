@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import { MdOutlineLightMode, MdDarkMode } from "react-icons/md";
 
 export default function ButtonAppBar({toggleTheme, mode}) {
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
