@@ -1,8 +1,16 @@
 import { Container, Box, TextField, Button, Typography, Paper, Stack } from "@mui/material";
 import { useState } from "react";
 import { useProductStore } from "../store/product";
+import { Snackbar, Alert } from "@mui/material";
 
 const CreatePage = () => {
+
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success", // "success" | "error" | "warning" | "info"
+  });
+
   const [newProduct, setNewProduct] = useState({
     name: "",
     price: "",
@@ -15,6 +23,15 @@ const CreatePage = () => {
     const {success, message} = await createProduct(newProduct)
     console.log("Success: ", success);
     console.log("Message: ", message);
+    setSnackbar({
+      open:true,
+      message:message,
+      severity:success ? "success" : "error",
+    });
+    if (success) {
+      setNewProduct({name:"", price:"", image:""});
+    };
+    
   };
 
   return (
@@ -61,10 +78,26 @@ const CreatePage = () => {
             >
               Add Product
             </Button>
+
           </Stack>
         </Paper>
       </Stack>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={5000}
+        onClose={() => setSnackbar({...snackbar, open:false})}
+        anchorOrigin={{vertical:"bottom", horizontal:"center"}}
+      >
+        <Alert
+          onClose={() => setSnackbar({...snackbar, open:false})}
+          severity={snackbar.severity}
+          sx={{width: "100%"}}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
+
 export default CreatePage;

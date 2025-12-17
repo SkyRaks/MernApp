@@ -30,11 +30,14 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
         <Box sx={{height: '100vh'}}>
+
           <NavBar toggleTheme={toggleTheme} mode={mode}/>
+
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/create" element={<CreatePage />}></Route>
           </Routes>
+          
         </Box>
     </ThemeProvider>
   );

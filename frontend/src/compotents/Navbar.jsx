@@ -8,6 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { CiSquarePlus } from "react-icons/ci";
 import Container from '@mui/material/Container';
 import { MdOutlineLightMode, MdDarkMode } from "react-icons/md";
+import {Link} from "react-router-dom";
 
 export default function ButtonAppBar({toggleTheme, mode}) {
   
@@ -27,12 +28,22 @@ export default function ButtonAppBar({toggleTheme, mode}) {
           </IconButton>
           
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Button color="inherit">Home</Button>
+            <Button 
+              color="inherit"
+              component={Link}
+              to="/"
+            >
+              Home
+            </Button>
           </Typography>
 
-          <Button color="inherit">
+          <IconButton 
+          color="inherit"
+          component={Link}
+          to="/create"
+          >
             <CiSquarePlus size="30px"/>
-          </Button>
+          </IconButton>
 
           <IconButton color="inherit" onClick={toggleTheme}>
             {mode === "light" ? (<MdDarkMode size="30px"/>) : (<MdOutlineLightMode size="30px"/>)}
