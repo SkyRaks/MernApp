@@ -1,8 +1,61 @@
-import React from 'react'
+import { Box, Container, Grid, Link as MuiLink, Stack, Typography, } from '@mui/material';
+import { useEffect } from 'react';
+import { Link } from "react-router-dom";
+import { useProductStore } from "../store/product";
+import ProductCard from '../compotents/ProductCard';
 
 const HomePage = () => {
+  const {fetchProducts, products} = useProductStore();
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+  console.log("products", products);
+
   return (
-    <div>HomePage</div>
+    <Container>
+      <Stack spacing={4} mt={4} alignItems={"center"}>
+        <Typography 
+          variant="h4"
+          textAlign={"center"}
+          fontWeight={"bold"}
+        >
+          Current Products
+        </Typography>
+
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={2}>
+            {products.map((product) => (
+
+              <Grid Item key={product.id} size={4}>
+                <ProductCard product={product}/>
+              </Grid>
+
+            ))}    
+          </Grid>
+        </Box>
+
+        {products.length === 0 && (
+          <Typography
+          variant='h6'
+          textAlign={"center"}
+          fontWeight={"bold"}
+          color='text.secondary'
+        >
+          No products found, try to {" "}
+          <MuiLink 
+            component={Link}
+            to="/create"
+            sx={{ textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
+          >
+            create a product
+          </MuiLink>
+        </Typography>
+        )}
+
+      </Stack>
+
+    </Container>
   )
 }
 

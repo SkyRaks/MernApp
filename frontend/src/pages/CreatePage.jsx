@@ -82,6 +82,7 @@ const CreatePage = () => {
           </Stack>
         </Paper>
       </Stack>
+
       <Snackbar
         open={snackbar.open}
         autoHideDuration={5000}
@@ -96,6 +97,7 @@ const CreatePage = () => {
           {snackbar.message}
         </Alert>
       </Snackbar>
+
     </Container>
   );
 };
