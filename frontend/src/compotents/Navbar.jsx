@@ -9,6 +9,7 @@ import { CiSquarePlus } from "react-icons/ci";
 import Container from '@mui/material/Container';
 import { MdOutlineLightMode, MdDarkMode } from "react-icons/md";
 import {Link} from "react-router-dom";
+import { IoPersonCircle } from "react-icons/io5";
 
 export default function ButtonAppBar({toggleTheme, mode}) {
   
@@ -43,6 +44,12 @@ export default function ButtonAppBar({toggleTheme, mode}) {
           to="/create"
           >
             <CiSquarePlus size="30px"/>
+          </IconButton>
+
+          <IconButton 
+          color="inherit"
+          >
+            <IoPersonCircle size="30px"/>
           </IconButton>
 
           <IconButton color="inherit" onClick={toggleTheme}>

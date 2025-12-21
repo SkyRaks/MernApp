@@ -3,6 +3,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
 import productRoutes from "./routes/product.route.js";
+import authRoutes from "./routes/auth.route.js";
+// import protectedRoutes from "./routes/protected.route.js";
 import path from "path";
 
 dotenv.config();
@@ -13,6 +15,9 @@ const PORT = process.env.PORT || 5000;
 const __dirname = path.resolve(); // this is for deployment
 
 app.use(express.json()); //allows to parse json data in request body, middleware
+
+app.use("/api/auth", authRoutes);
+// app.use("/api/protected", protectedRoutes);
 
 app.use("/api/products", productRoutes);
 
