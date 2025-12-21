@@ -4,6 +4,8 @@ import { Route, Routes } from "react-router-dom";
 
 import CreatePage from "./pages/CreatePage";
 import HomePage from "./pages/HomePage";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
 import NavBar from "./compotents/Navbar";
 
 import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
@@ -36,6 +38,8 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/create" element={<CreatePage />}></Route>
+            <Route path="/signup" element={<SignUpPage />}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
           </Routes>
           
         </Box>
