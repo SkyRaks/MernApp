@@ -23,7 +23,7 @@ const SignUpPage = () => {
 
     const navigate = useNavigate();
 
-    const handleSignUp = async () => {
+    const handleSignup = async () => {
         if (!newUser.name || !newUser.email || !newUser.password || !newUser.confirmPassword) {
             setSnackbar({ open: true, message: "please provide all fields", severity: "error", });
             return;
@@ -106,7 +106,7 @@ const SignUpPage = () => {
               variant="contained"
               fullWidth
               size="large"
-              onClick={handleSignUp}
+              onClick={handleSignup}
             >
               Sign Up
             </Button>
