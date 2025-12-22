@@ -10,8 +10,13 @@ import Container from '@mui/material/Container';
 import { MdOutlineLightMode, MdDarkMode } from "react-icons/md";
 import {Link} from "react-router-dom";
 import { IoPersonCircle } from "react-icons/io5";
+import { IoIosLogIn } from "react-icons/io";
+import { useUserStore } from '../store/user';
 
 export default function ButtonAppBar({toggleTheme, mode}) {
+
+  const user = useUserStore((state) => state.user)
+  const logout = useUserStore((state) => state.logout)
   
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -38,21 +43,33 @@ export default function ButtonAppBar({toggleTheme, mode}) {
             </Button>
           </Typography>
 
-          <IconButton 
-          color="inherit"
-          component={Link}
-          to="/create"
-          >
-            <CiSquarePlus size="30px"/>
-          </IconButton>
+          {user !== null ?           
+          (
+            <>
+              <IconButton 
+              color="inherit"
+              component={Link}
+              to="/create"
+              >
+                <CiSquarePlus size="30px"/>
+              </IconButton>
 
-          <IconButton 
-          color="inherit"
-          component={Link}
-          to="/signup"
-          >
-            <IoPersonCircle size="30px"/>
-          </IconButton>
+              <IconButton
+                color="inherit"
+                onClick={logout}
+              >
+                <IoIosLogIn />
+              </IconButton>
+            </>
+          ) : (
+            <IconButton 
+              color="inherit"
+              component={Link}
+              to="/signup"
+            >
+              <IoPersonCircle size="30px"/>
+            </IconButton>
+          )}
 
           <IconButton color="inherit" onClick={toggleTheme}>
             {mode === "light" ? (<MdDarkMode size="30px"/>) : (<MdOutlineLightMode size="30px"/>)}

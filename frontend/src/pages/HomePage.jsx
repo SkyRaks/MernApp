@@ -3,8 +3,10 @@ import { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useProductStore } from "../store/product";
 import ProductCard from '../compotents/ProductCard';
+import { useUserStore } from '../store/user';
 
 const HomePage = () => {
+  const user = useUserStore((state) => state.user)
   const {fetchProducts, products} = useProductStore();
 
   useEffect(() => {
@@ -15,6 +17,9 @@ const HomePage = () => {
   return (
     <Container>
       <Stack spacing={4} mt={4} alignItems={"center"}>
+        {user !== null ? (
+          <>
+
         <Typography 
           variant="h4"
           textAlign={"center"}
@@ -36,7 +41,7 @@ const HomePage = () => {
         </Box>
 
         {products.length === 0 && (
-          <Typography
+        <Typography
           variant='h6'
           textAlign={"center"}
           fontWeight={"bold"}
@@ -49,6 +54,24 @@ const HomePage = () => {
             sx={{ textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
           >
             create a product
+          </MuiLink>
+        </Typography>
+        )}
+        </>
+        ) : (
+          <Typography
+          variant='h6'
+          textAlign={"center"}
+          fontWeight={"bold"}
+          color='text.secondary'
+        >
+          You are not logged in, {" "}
+          <MuiLink 
+            component={Link}
+            to="/login"
+            sx={{ textDecoration: "none", "&:hover": { textDecoration: "underline" } }}
+          >
+            log in
           </MuiLink>
         </Typography>
         )}
